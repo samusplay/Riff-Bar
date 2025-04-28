@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block title %}Mesas Reservadas - RiffBar{% endblock %}
+
+{% block contenido %}
+<h1 class="text-2xl font-bold mb-6">Mesas Reservadas</h1>
+
+{% if reservas %}
+    <table class="min-w-full bg-white border border-gray-300 rounded-lg overflow-hidden">
+        <thead class="bg-blue-500 text-white">
+            <tr>
+                <th class="py-2 px-4 border-b">Número Mesa</th>
+                <th class="py-2 px-4 border-b">Estado</th>
+                <th class="py-2 px-4 border-b">Cliente</th>
+                <th class="py-2 px-4 border-b">Fecha y Hora</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for reserva in reservas %}
+            <tr class="hover:bg-gray-100">
+                <td class="py-2 px-4 border-b">{{ reserva.numero_mesa }}</td>
+                <td class="py-2 px-4 border-b">{{ reserva.estado }}</td>
+                <td class="py-2 px-4 border-b">{{ reserva.nombre_cliente }}</td>
+                <td class="py-2 px-4 border-b">{{ reserva.fecha_hora }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    <p>No hay reservas registradas.</p>
+{% endif %}
+
+<br>
+<a href="{% url 'crear_reserva' %}">
+    <button class="mt-4 bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
+        Crear Nueva Reserva
+    </button>
+</a>
+{% endblock %}
+
